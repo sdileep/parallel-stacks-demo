@@ -69,7 +69,7 @@
       "description": "Synthesize project files",
       "steps": [
         {
-          "exec": "node .projenrc.js"
+          "exec": "ts-node --project tsconfig.dev.json .projenrc.ts"
         }
       ]
     },
@@ -78,7 +78,8 @@
       "description": "Deploys your CDK app to the AWS cloud",
       "steps": [
         {
-          "exec": "cdk deploy"
+          "exec": "cdk deploy",
+          "receiveArgs": true
         }
       ]
     },
@@ -87,7 +88,8 @@
       "description": "Destroys your cdk app in the AWS cloud",
       "steps": [
         {
-          "exec": "cdk destroy"
+          "exec": "cdk destroy",
+          "receiveArgs": true
         }
       ]
     },
@@ -117,7 +119,7 @@
       "description": "Runs eslint against the codebase",
       "steps": [
         {
-          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern src test build-tools .projenrc.js"
+          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern src test build-tools projenrc .projenrc.ts"
         }
       ]
     },
@@ -125,7 +127,7 @@
       "name": "generate:stack-graphs",
       "steps": [
         {
-          "exec": "node bin/generateStackGraphs.js"
+          "exec": "ts-node scripts/generateStackGraphs.ts"
         }
       ]
     },
@@ -160,7 +162,7 @@
       "description": "Synthesizes your cdk app into cdk.out and suppresses the template in stdout (part of \"yarn build\")",
       "steps": [
         {
-          "exec": "cdk synth > /dev/null"
+          "exec": "cdk synth -q"
         }
       ]
     },
@@ -169,19 +171,11 @@
       "description": "Run tests",
       "steps": [
         {
-          "exec": "jest --passWithNoTests --all --updateSnapshot"
+          "exec": "jest --passWithNoTests --coverageProvider=v8 --updateSnapshot",
+          "receiveArgs": true
         },
         {
           "spawn": "eslint"
-        }
-      ]
-    },
-    "test:update": {
-      "name": "test:update",
-      "description": "Update jest snapshots",
-      "steps": [
-        {
-          "exec": "jest --updateSnapshot"
         }
       ]
     },

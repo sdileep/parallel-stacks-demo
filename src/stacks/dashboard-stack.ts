@@ -1,3 +1,4 @@
+import { Duration, Stack, StackProps } from 'aws-cdk-lib';
 import {
   Dashboard,
   GraphWidget,
@@ -5,9 +6,9 @@ import {
   LegendPosition,
   LogQueryWidget,
   MathExpression,
-} from '@aws-cdk/aws-cloudwatch';
-import { IFunction } from '@aws-cdk/aws-lambda';
-import { Construct, Duration, Stack, StackProps } from '@aws-cdk/core';
+} from 'aws-cdk-lib/aws-cloudwatch';
+import { IFunction } from 'aws-cdk-lib/aws-lambda';
+import { Construct } from 'constructs';
 
 export interface DashboardStackProps extends StackProps {
   stage: string;

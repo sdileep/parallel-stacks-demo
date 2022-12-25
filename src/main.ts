@@ -1,12 +1,7 @@
-import { App } from '@aws-cdk/core';
+import { App } from 'aws-cdk-lib';
+import 'source-map-support/register';
 
-import {
-  ApiStack,
-  AsyncJobsStack,
-  DashboardStack,
-  DatastoreStack,
-  SecretsStack,
-} from './stacks';
+import { ApiStack, AsyncJobsStack, DashboardStack, DatastoreStack, SecretsStack } from './stacks';
 
 const app = new App();
 

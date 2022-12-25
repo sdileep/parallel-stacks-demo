@@ -1,5 +1,6 @@
-import { Secret } from '@aws-cdk/aws-secretsmanager';
-import { Construct, Stack, StackProps } from '@aws-cdk/core';
+import { Stack, StackProps } from 'aws-cdk-lib';
+import { Secret } from 'aws-cdk-lib/aws-secretsmanager';
+import { Construct } from 'constructs';
 
 export interface SecretsStackProps extends StackProps {
   stage: string;

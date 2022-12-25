@@ -1,6 +1,6 @@
-import { AttributeType, BillingMode, Table, TableEncryption } from '@aws-cdk/aws-dynamodb';
-import { StringParameter } from '@aws-cdk/aws-ssm';
-import { App, RemovalPolicy, Stack, StackProps } from '@aws-cdk/core';
+import { App, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
+import { AttributeType, BillingMode, Table, TableEncryption } from 'aws-cdk-lib/aws-dynamodb';
+import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 
 export interface DatastoreStackProps extends StackProps {
   stage: string;

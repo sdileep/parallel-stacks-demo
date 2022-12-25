@@ -1,8 +1,8 @@
-const path = require('path');
-const fs = require('fs-extra');
+import path from 'path';
+import fs from 'fs-extra';
 
-const { Component } = require('projen');
-const { JobPermission } = require('projen/lib/github/workflows-model');
+import { Component } from 'projen';
+import { JobPermission } from 'projen/lib/github/workflows-model';
 
 const DEFAULT_UBUNTU = 'ubuntu-latest';
 
@@ -11,7 +11,7 @@ class BasicDeployWorkflow extends Component {
   buildJobId;
   buildJob;
 
-  constructor(project, options) {
+  constructor(project: any, options: any) {
     super(project);
 
     this.buildJobId = options.jobId ?? 'build';
@@ -105,7 +105,7 @@ class BasicDeployWorkflow extends Component {
     this.workflow.addJobs({ [this.buildJobId]: this.buildJob });
   }
 
-  installWorkflowSteps(project) {
+  installWorkflowSteps(project: any) {
     return [
       {
         name: 'Setup Node.js',
@@ -151,10 +151,10 @@ class BasicDeployWorkflow extends Component {
   }
 }
 
-class GraphDeployWorkflow extends BasicDeployWorkflow {
+export class GraphDeployWorkflow extends BasicDeployWorkflow {
   deployJobId;
 
-  constructor(project, options) {
+  constructor(project: any, options: any) {
     super(project, {
       ...options,
       artifactDirectory: 'cdk.out',
@@ -180,7 +180,7 @@ class GraphDeployWorkflow extends BasicDeployWorkflow {
       for (const stack of stacks) {
         stack.jobName = stack.name.replace('-', '_');
 
-        const deps = stack.dependencies.map((name) => name.replace('-', '_'));
+        const deps = stack.dependencies.map((name: string) => name.replace('-', '_'));
 
         this.workflow.addJob(stack.jobName, {
           runsOn: [DEFAULT_UBUNTU],
@@ -226,7 +226,6 @@ class GraphDeployWorkflow extends BasicDeployWorkflow {
   }
 }
 
-
-module.exports = {
-  GraphDeployWorkflow 
-}
+// module.exports = {
+//   GraphDeployWorkflow,
+// };
